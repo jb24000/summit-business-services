@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Summit Business Services — Bookkeeping cleanup and monthly financial management for service businesses in Durham, NC and beyond.">
+<title>Summit Business Services | Bookkeeping Cleanup & Monthly Financials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2A5C;--navy-dk:#111B3C;--navy-lt:#243470;
+  --gold:#C9A84C;--gold-lt:#E8C97A;--gold-bg:#FBF5E6;
+  --cream:#FAF8F3;--white:#FFFFFF;--gray:#6B7280;
+  --text:#1F2937;--border:#E5E0D0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--cream);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.gold-line{display:block;width:48px;height:2px;background:var(--gold);margin:0 auto 20px}
+.gold-line.left{margin:0 0 20px}
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:none}
+.fade-up.d1{transition-delay:.1s}.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}.fade-up.d4{transition-delay:.4s}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:background .3s,padding .3s,box-shadow .3s}
+#nav.scrolled{background:var(--navy-dk);padding:12px 0;box-shadow:0 2px 20px rgba(0,0,0,.25)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo img{height:44px;width:auto;filter:brightness(1)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy-dk)!important;padding:10px 22px;border-radius:4px;font-weight:600!important;transition:background .2s,transform .2s!important}
+.nav-cta:hover{background:var(--gold-lt)!important;transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:22px;height:2px;background:white;margin:5px 0;transition:.3s}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--navy-dk);position:relative;overflow:hidden;display:flex;align-items:center;padding:120px 0 80px}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(201,168,76,.08) 0%,transparent 70%),radial-gradient(ellipse 50% 80% at 20% 80%,rgba(27,42,92,.8) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-mountain{position:absolute;bottom:-2px;right:-40px;opacity:.06;pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,72px);font-weight:600;line-height:1.1;color:var(--white);margin-bottom:24px}
+.hero-headline em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.72);max-width:540px;margin-bottom:40px}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy-dk);padding:16px 32px;border-radius:4px;font-size:14px;font-weight:600;letter-spacing:.04em;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.btn-primary svg{transition:transform .2s}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:14px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+.hero-trust{margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.55)}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* PAIN */
+#pain{background:var(--white);padding:100px 0}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pain-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:600;line-height:1.15;color:var(--navy);margin-bottom:20px}
+.section-headline em{font-style:italic;color:var(--gold)}
+.section-body{font-size:16px;font-weight:300;line-height:1.75;color:var(--gray);margin-bottom:32px}
+.pain-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.pain-item{display:flex;align-items:flex-start;gap:14px;padding:16px 18px;background:var(--cream);border-radius:6px;border-left:3px solid var(--gold);font-size:14px;line-height:1.5;color:var(--text)}
+.pain-icon{width:20px;height:20px;flex-shrink:0;color:var(--gold);margin-top:1px}
+.pain-visual{background:var(--navy);border-radius:12px;padding:40px;position:relative;overflow:hidden}
+.pain-visual-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.12),transparent 60%)}
+.pain-stat{position:relative;z-index:1;margin-bottom:32px}
+.pain-stat:last-child{margin-bottom:0}
+.pain-stat-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--gold);line-height:1}
+.pain-stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px;line-height:1.4}
+.pain-divider{height:1px;background:rgba(255,255,255,.1);margin:28px 0}
+
+/* PROCESS */
+#process{background:var(--cream);padding:100px 0}
+.process-header{text-align:center;margin-bottom:64px}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.process-step{background:var(--white);padding:40px 32px;border-top:3px solid transparent;transition:border-color .3s,transform .3s,box-shadow .3s}
+.process-step:first-child{border-radius:8px 0 0 8px}
+.process-step:last-child{border-radius:0 8px 8px 0}
+.process-step:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 40px rgba(27,42,92,.1)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:600;color:rgba(201,168,76,.2);line-height:1;margin-bottom:16px}
+.step-title{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:12px}
+.step-body{font-size:14px;font-weight:300;line-height:1.7;color:var(--gray)}
+.step-tag{display:inline-block;margin-top:20px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-bg);padding:4px 10px;border-radius:99px}
+
+/* SERVICES — two section layout */
+#services{background:var(--navy);padding:100px 0;position:relative;overflow:hidden}
+.services-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 90% 50%,rgba(201,168,76,.06),transparent),linear-gradient(180deg,var(--navy-dk) 0%,var(--navy) 100%)}
+.services-header{text-align:center;margin-bottom:56px;position:relative;z-index:1}
+.services-header .section-headline{color:var(--white)}
+.services-header .section-body{color:rgba(255,255,255,.6);max-width:560px;margin:0 auto}
+.services-block{position:relative;z-index:1;margin-bottom:64px}
+.services-block:last-child{margin-bottom:0}
+.services-block-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.services-block-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--white)}
+.services-block-sub{font-size:13px;color:rgba(255,255,255,.45);font-style:italic}
+/* Monthly grid */
+.monthly-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:32px 26px;transition:background .3s,border-color .3s,transform .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+.service-card:hover{background:rgba(255,255,255,.07);border-color:rgba(201,168,76,.3);transform:translateY(-4px)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card.featured{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3)}
+.service-card.featured::before{transform:scaleX(1)}
+.service-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:4px 10px;border-radius:99px;margin-bottom:16px}
+.service-tier{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:4px}
+.service-size{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;font-style:italic}
+.service-price{font-size:30px;font-weight:600;color:var(--gold);margin-bottom:6px}
+.service-price span{font-size:14px;font-weight:400;color:rgba(255,255,255,.5)}
+.service-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5;margin-bottom:20px}
+.service-divider{height:1px;background:rgba(255,255,255,.1);margin-bottom:20px}
+.service-features{list-style:none;display:flex;flex-direction:column;gap:9px}
+.service-feature{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.4}
+.service-check{color:var(--gold);flex-shrink:0;margin-top:1px}
+/* Cleanup card */
+.cleanup-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.cleanup-left{}
+.cleanup-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--white);margin-bottom:12px}
+.cleanup-body{font-size:14px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.6);margin-bottom:24px}
+.cleanup-factors{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cleanup-factor{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.6)}
+.cleanup-factor::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.cleanup-right{border-left:1px solid rgba(255,255,255,.1);padding-left:48px}
+.cleanup-cta-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.cleanup-cta-text{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);line-height:1.35;margin-bottom:24px;font-style:italic}
+.services-note{text-align:center;margin-top:40px;position:relative;z-index:1;font-size:13px;color:rgba(255,255,255,.35);font-style:italic}
+
+/* WHO WE SERVE */
+#niche{background:var(--cream);padding:80px 0}
+.niche-header{text-align:center;margin-bottom:48px}
+.niche-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.niche-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px 16px;text-align:center;transition:border-color .2s,transform .2s,box-shadow .2s}
+.niche-item:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,42,92,.08)}
+.niche-icon{font-size:28px;margin-bottom:10px}
+.niche-label{font-size:13px;font-weight:600;color:var(--navy)}
+
+/* ABOUT */
+#about{background:var(--white);padding:100px 0}
+.about-grid{display:grid;grid-template-columns:400px 1fr;gap:80px;align-items:center}
+.about-photo{position:relative}
+.about-photo-frame{width:100%;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:var(--cream);position:relative}
+.about-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.about-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-lt) 100%);color:rgba(255,255,255,.4);font-size:13px;gap:12px}
+.about-photo-accent{position:absolute;bottom:-16px;right:-16px;width:80px;height:80px;background:var(--gold);border-radius:4px;z-index:-1}
+.about-photo-tag{position:absolute;bottom:24px;left:-20px;background:var(--navy);color:white;padding:12px 18px;border-radius:6px;font-size:12px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);white-space:nowrap}
+.about-photo-tag span{display:block;font-size:10px;font-weight:400;color:var(--gold);margin-top:2px}
+.about-creds{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.cred-badge{display:inline-flex;align-items:center;gap:6px;background:var(--cream);border:1px solid var(--border);padding:7px 14px;border-radius:99px;font-size:12px;font-weight:600;color:var(--navy);letter-spacing:.04em}
+.cred-badge svg{color:var(--gold)}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;font-style:italic;color:var(--navy);line-height:1.6;border-left:3px solid var(--gold);padding-left:20px;margin:28px 0}
+.about-body{font-size:15px;font-weight:300;line-height:1.8;color:var(--gray);margin-bottom:16px}
+
+/* CTA */
+#cta{background:var(--navy-dk);padding:100px 0;text-align:center;position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,168,76,.08),transparent)}
+.cta-inner{position:relative;z-index:1;max-width:620px;margin:0 auto}
+.cta-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,54px);font-weight:600;color:var(--white);line-height:1.15;margin-bottom:20px}
+.cta-headline em{font-style:italic;color:var(--gold)}
+.cta-body{font-size:16px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.65);margin-bottom:40px}
+.cta-guarantee{margin-top:28px;font-size:13px;color:rgba(255,255,255,.35);font-style:italic}
+
+/* FOOTER */
+#footer{background:#0B1122;padding:48px 0 32px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+.footer-logo img{height:36px;width:auto}
+.footer-links{display:flex;gap:28px;list-style:none;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.45);transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+.footer-legal{font-size:11px;color:rgba(255,255,255,.2);max-width:500px;text-align:right;line-height:1.5}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;gap:0;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy-dk);z-index:99;padding:100px 32px 40px;align-items:flex-start}
+  .nav-links.open li{width:100%}
+  .nav-links.open a{display:block;font-size:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-toggle{display:block;position:relative;z-index:100}
+  .pain-grid{grid-template-columns:1fr;gap:40px}
+  .pain-visual{display:none}
+  .process-steps{grid-template-columns:1fr;gap:16px}
+  .process-step:first-child,.process-step:last-child{border-radius:8px}
+  .monthly-grid{grid-template-columns:1fr}
+  .cleanup-card{grid-template-columns:1fr;gap:28px}
+  .cleanup-right{border-left:none;border-top:1px solid rgba(255,255,255,.1);padding-left:0;padding-top:28px}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .about-photo{max-width:320px;margin:0 auto}
+  .niche-grid{grid-template-columns:repeat(3,1fr)}
+  .footer-inner{flex-direction:column}
+  .footer-bottom{flex-direction:column}
+  .footer-legal{text-align:left}
+}
+@media(max-width:560px){
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .niche-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Summit Business Services">
+        <img src="logo.png" alt="Summit Business Services">
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#pain">Why It Matters</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <svg class="hero-mountain" width="600" height="400" viewBox="0 0 600 400" fill="none">
+    <polygon points="300,20 560,380 40,380" fill="white"/>
+    <polygon points="300,120 420,380 180,380" fill="white" opacity=".6"/>
+  </svg>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow fade-up">Bookkeeping Cleanup Specialists</div>
+      <h1 class="hero-headline fade-up d1">
+        Behind on your books?<br><em>That ends here.</em>
+      </h1>
+      <p class="hero-sub fade-up d2">
+        We clean up the backlog, organize your financials, and keep your books accurate every month.
+      </p>
+      <div class="hero-actions fade-up d3">
+        <a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank" class="btn-primary">
+          Book a Free Discovery Call
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost">See services</a>
+      </div>
+      <div class="hero-trust fade-up d4">
+        <div class="trust-item"><span class="trust-dot"></span>15+ Years Financial Services</div>
+        <div class="trust-item"><span class="trust-dot"></span>QuickBooks Online</div>
+        <div class="trust-item"><span class="trust-dot"></span>Durham, NC &amp; Remote</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="container">
+    <div class="pain-grid">
+      <div class="fade-up">
+        <p class="pain-label">Sound familiar?</p>
+        <h2 class="section-headline">Your books are a problem<br><em>you keep putting off.</em></h2>
+        <p class="section-body">Service business owners are great at what they do. Bookkeeping usually isn't it. The longer the backlog grows, the more it costs — in stress, in tax exposure, and in decisions made without real numbers.</p>
+        <ul class="pain-list">
+          <li class="pain-item">
+            <svg class="pain-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Your books are months — or years — behind
+          </li>
+          <li class="pain-item">
+            <svg class="pain-icon" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M3 6h14M3 14h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Tax season turns into a scramble every year
+          </li>
+          <li class="pain-item">
+            <svg class="pain-icon" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10l7-7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            You don't know if you're actually profitable
+          </li>
+          <li class="pain-item">
+            <svg class="pain-icon" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 4V2M13 4V2M3 9h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Your CPA keeps asking for records you can't find
+          </li>
+          <li class="pain-item">
+            <svg class="pain-icon" viewBox="0 0 20 20" fill="none"><path d="M10 17a7 7 0 100-14 7 7 0 000 14zM10 7v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            You're making financial decisions without real data
+          </li>
+        </ul>
+      </div>
+      <div class="pain-visual fade-up d2">
+        <div class="pain-visual-bg"></div>
+        <div class="pain-stat">
+          <div class="pain-stat-num">82%</div>
+          <div class="pain-stat-label">of small businesses fail due to cash flow problems — most rooted in poor financial visibility</div>
+        </div>
+        <div class="pain-divider"></div>
+        <div class="pain-stat">
+          <div class="pain-stat-num">$4,800</div>
+          <div class="pain-stat-label">average cost to a small business for a single year of messy books at tax time</div>
+        </div>
+        <div class="pain-divider"></div>
+        <div class="pain-stat">
+          <div class="pain-stat-num">30 days</div>
+          <div class="pain-stat-label">average time to complete a full cleanup and have your books current and accurate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="process-header fade-up">
+      <span class="gold-line"></span>
+      <p class="pain-label" style="text-align:center">The process</p>
+      <h2 class="section-headline" style="text-align:center">From messy to clean<br><em>in three steps</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up d1">
+        <div class="step-num">01</div>
+        <h3 class="step-title">We scope the work</h3>
+        <p class="step-body">A free 30-minute discovery call. We assess how far behind your books are, identify what needs to be fixed, and give you a clear quote — no surprises, no obligation.</p>
+        <span class="step-tag">Free discovery call</span>
+      </div>
+      <div class="process-step fade-up d2">
+        <div class="step-num">02</div>
+        <h3 class="step-title">We clean the books</h3>
+        <p class="step-body">Month by month reconciliation. We fix categorizations, clear unreconciled transactions, correct the chart of accounts, and deliver a full cleanup report with corrected financials.</p>
+        <span class="step-tag">Scoped cleanup project</span>
+      </div>
+      <div class="process-step fade-up d3">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Clean books every month</h3>
+        <p class="step-body">After cleanup, your books stay clean. Monthly reconciliation, accurate financial statements, and a plain-English summary of what your numbers are telling you — on time, every month.</p>
+        <span class="step-tag">Monthly retainer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-bg"></div>
+  <div class="container">
+    <div class="services-header fade-up">
+      <span class="gold-line"></span>
+      <p class="pain-label">Services &amp; pricing</p>
+      <h2 class="section-headline">Two services.<br><em>One financial partner.</em></h2>
+      <p class="section-body">Monthly bookkeeping priced by business size. Cleanup projects scoped individually — because every backlog is different.</p>
+    </div>
+
+    <!-- Monthly Bookkeeping -->
+    <div class="services-block fade-up">
+      <div class="services-block-header">
+        <div class="services-block-title">Monthly Bookkeeping</div>
+        <div class="services-block-sub">Recurring retainer — priced by business size</div>
+      </div>
+      <div class="monthly-grid">
+        <div class="service-card fade-up d1">
+          <div class="service-badge">Micro Business</div>
+          <div class="service-tier">Solo &amp; Small</div>
+          <div class="service-size">1–5 employees &nbsp;·&nbsp; up to 150 transactions/mo</div>
+          <div class="service-price">$400<span>/mo</span></div>
+          <div class="service-desc">Ideal for owner-operators and lean service businesses needing clean, reliable monthly books.</div>
+          <div class="service-divider"></div>
+          <ul class="service-features">
+            <li class="service-feature"><span class="service-check">✦</span>Monthly bank reconciliation</li>
+            <li class="service-feature"><span class="service-check">✦</span>Profit &amp; Loss statement</li>
+            <li class="service-feature"><span class="service-check">✦</span>Balance sheet</li>
+            <li class="service-feature"><span class="service-check">✦</span>Monthly financial summary</li>
+            <li class="service-feature"><span class="service-check">✦</span>Up to 2 bank/credit accounts</li>
+          </ul>
+        </div>
+        <div class="service-card featured fade-up d2">
+          <div class="service-badge">Most Popular</div>
+          <div class="service-tier">Small Business</div>
+          <div class="service-size">5–15 employees &nbsp;·&nbsp; up to 300 transactions/mo</div>
+          <div class="service-price">$500–$600<span>/mo</span></div>
+          <div class="service-desc">For growing service businesses with employees, multiple accounts, and more complex financial activity.</div>
+          <div class="service-divider"></div>
+          <ul class="service-features">
+            <li class="service-feature"><span class="service-check">✦</span>Monthly bank reconciliation</li>
+            <li class="service-feature"><span class="service-check">✦</span>Profit &amp; Loss statement</li>
+            <li class="service-feature"><span class="service-check">✦</span>Balance sheet</li>
+            <li class="service-feature"><span class="service-check">✦</span>Monthly financial summary</li>
+            <li class="service-feature"><span class="service-check">✦</span>Up to 4 bank/credit accounts</li>
+            <li class="service-feature"><span class="service-check">✦</span>Basic reporting package</li>
+          </ul>
+        </div>
+        <div class="service-card fade-up d3">
+          <div class="service-badge">Growing Business</div>
+          <div class="service-tier">Established</div>
+          <div class="service-size">15–30 employees &nbsp;·&nbsp; up to 500 transactions/mo</div>
+          <div class="service-price">$650–$800<span>/mo</span></div>
+          <div class="service-desc">For established service businesses with higher transaction volume, multiple entities, or detailed reporting needs.</div>
+          <div class="service-divider"></div>
+          <ul class="service-features">
+            <li class="service-feature"><span class="service-check">✦</span>Monthly bank reconciliation</li>
+            <li class="service-feature"><span class="service-check">✦</span>Profit &amp; Loss statement</li>
+            <li class="service-feature"><span class="service-check">✦</span>Balance sheet</li>
+            <li class="service-feature"><span class="service-check">✦</span>Monthly financial summary</li>
+            <li class="service-feature"><span class="service-check">✦</span>Up to 6 bank/credit accounts</li>
+            <li class="service-feature"><span class="service-check">✦</span>KPI reporting dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cleanup Services -->
+    <div class="services-block fade-up">
+      <div class="services-block-header">
+        <div class="services-block-title">Cleanup Bookkeeping</div>
+        <div class="services-block-sub">Scoped individually — every backlog is different</div>
+      </div>
+      <div class="cleanup-card">
+        <div class="cleanup-left">
+          <div class="cleanup-title">Every cleanup is scoped individually.</div>
+          <p class="cleanup-body">Cleanup pricing depends on the size of the backlog, transaction volume, account complexity, and the overall condition of the books. We assess everything on the discovery call and give you a clear flat-fee quote before any work begins.</p>
+          <ul class="cleanup-factors">
+            <li class="cleanup-factor">Months of backlog</li>
+            <li class="cleanup-factor">Monthly transaction volume</li>
+            <li class="cleanup-factor">Number of accounts and entities</li>
+            <li class="cleanup-factor">Reconciliation condition of existing records</li>
+            <li class="cleanup-factor">Complexity of chart of accounts</li>
+          </ul>
+        </div>
+        <div class="cleanup-right">
+          <div class="cleanup-cta-label">What you get</div>
+          <div class="cleanup-cta-text">"A flat-fee quote, a clear timeline, and books that are current and accurate when we're done."</div>
+          <ul class="service-features" style="margin-bottom:28px">
+            <li class="service-feature"><span class="service-check">✦</span>Month-by-month reconciliation</li>
+            <li class="service-feature"><span class="service-check">✦</span>Corrected Profit &amp; Loss</li>
+            <li class="service-feature"><span class="service-check">✦</span>Corrected balance sheet</li>
+            <li class="service-feature"><span class="service-check">✦</span>Cleanup issues report</li>
+            <li class="service-feature"><span class="service-check">✦</span>Transition to monthly retainer</li>
+          </ul>
+          <a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank" class="btn-primary">
+            Get a Cleanup Quote
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="services-note fade-up">Not sure where you fall? Book a discovery call — we'll scope it and quote you before any work begins.</p>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="niche">
+  <div class="container">
+    <div class="niche-header fade-up">
+      <span class="gold-line"></span>
+      <h2 class="section-headline">Built for <em>service businesses</em></h2>
+    </div>
+    <div class="niche-grid">
+      <div class="niche-item fade-up d1"><div class="niche-icon">🔧</div><div class="niche-label">HVAC</div></div>
+      <div class="niche-item fade-up d2"><div class="niche-icon">🧹</div><div class="niche-label">Cleaning</div></div>
+      <div class="niche-item fade-up d3"><div class="niche-icon">🌿</div><div class="niche-label">Landscaping</div></div>
+      <div class="niche-item fade-up d4"><div class="niche-icon">🚛</div><div class="niche-label">Trucking</div></div>
+      <div class="niche-item fade-up d5"><div class="niche-icon">✂️</div><div class="niche-label">Salons</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo fade-up">
+        <div class="about-photo-frame">
+          <img src="headshot.jpg" alt="Melvin Bonner — Founder, Summit Business Services">
+        </div>
+        <div class="about-photo-accent"></div>
+        <div class="about-photo-tag">
+          Melvin Bonner
+          <span>CFP® &nbsp;·&nbsp; Founder</span>
+        </div>
+      </div>
+      <div class="fade-up d2">
+        <p class="pain-label">About</p>
+        <h2 class="section-headline">A financial professional<br>who <em>does the books.</em></h2>
+        <div class="about-creds">
+          <span class="cred-badge">15+ Yrs Financial Services</span>
+          <span class="cred-badge">QuickBooks Online</span>
+        </div>
+        <blockquote class="about-quote">
+          "I spent over a decade analyzing business finances before I ever touched a client's books. I know what clean financials look like — and exactly what messy ones cost."
+        </blockquote>
+        <p class="about-body">Summit Business Services exists because most bookkeepers can reconcile transactions. Not many can tell you what your numbers mean, where your margins are leaking, or what your financials look like to a lender or investor. That difference comes from financial training — not just bookkeeping training.</p>
+        <p class="about-body">With over 15 years in financial services and a CFP® designation, I bring a depth of financial analysis to your books that most bookkeepers simply cannot offer. The CFP® is not the service — it is the standard of thinking behind it. You get accurate records, and someone who actually understands what they mean.</p>
+        <a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank" class="btn-primary" style="margin-top:16px;display:inline-flex">
+          Book a Free Discovery Call
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <span class="gold-line" style="margin-bottom:24px"></span>
+      <h2 class="cta-headline fade-up">The longer you wait,<br><em>the bigger the backlog.</em></h2>
+      <p class="cta-body fade-up d1">Book a free 30-minute discovery call. We'll scope your cleanup, give you a flat-fee quote, and you decide if it's right for you. No pressure. No obligation.</p>
+      <a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank" class="btn-primary fade-up d2" style="margin:0 auto">
+        Book a Free Discovery Call
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="cta-guarantee fade-up d3">Free 30-minute call &nbsp;·&nbsp; Flat-fee quote included &nbsp;·&nbsp; No commitment required</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo"><img src="logo.png" alt="Summit Business Services"></div>
+      <ul class="footer-links">
+        <li><a href="#pain">Why It Matters</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://calendly.com/melvin-summitbizservices/30min" target="_blank">Book a Call</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 Summit Capital Holdings LLC &nbsp;·&nbsp; dba Summit Business Services &nbsp;·&nbsp; Durham, NC</p>
+      <p class="footer-legal">Summit Business Services provides bookkeeping and financial record-keeping services. Services do not constitute tax advice, financial planning, or accounting services.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+const toggle=document.getElementById('navToggle');
+const links=document.getElementById('navLinks');
+toggle.addEventListener('click',()=>{links.classList.toggle('open');document.body.style.overflow=links.classList.contains('open')?'hidden':'';});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');document.body.style.overflow='';}));
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+</script>
+</body>
+</html>
